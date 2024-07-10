@@ -1,0 +1,281 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.middle{
+    font-family: Arial, sans-serif;
+}
+.firstDiv{
+    width: 100%;
+    margin-left: 150px;
+}
+.left{
+    width: 50%;
+    float: left;
+    display: inline-block;
+    padding-left: 130px;
+}
+.right{
+    position: fixed;
+    top: 200px;
+    width: 30%;
+    right: 0;
+}
+.info{
+    display: inline-block;
+    width: 1100px;
+    margin-bottom: 50px;
+}
+.wait{
+    border: 1px solid darkgray;
+    font-size: 12px;
+    background-color: white;
+    padding: 1px 3px;
+    border-radius: 5px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    margin-left: 2px;
+}
+.title{
+    font-size: 28px;
+    font-weight: bolder;
+    height: 30px;
+}
+.ranking{
+    margin-top: 10px;
+    margin-left: -7px;
+}
+.detailImg{
+    width: 300px;
+    display: inline-block;
+    margin-right: 30px;
+    margin-top: 20px;
+    float: left;
+}
+.poster{
+    width: 300px;
+}
+.detailImg img:nth-child(2){
+    margin-left: -5px;
+    margin-top: 7px;
+}
+.detailImg img:nth-child(3){
+    margin-top: 7px;
+    float: right;
+}
+.detailImg img:nth-child(4){
+    margin-top: 7px;
+    float: right;
+}
+.detailImg a{
+    margin-top: 7px;
+    float: right;
+}
+.infoIn{
+    display: inline-block;
+    width: 500px;
+    float: right;
+    margin-top: 50px;
+    margin-right: 250px;
+}
+.infoIn table{
+    margin-top: 10px;
+    height: 300px;
+}
+.infoIn th{
+    font-weight: lighter;
+    width: 100px;
+    margin-right: 20px;
+}
+.infoIn td{
+    padding-left: 30px;
+}
+tr a{
+    text-decoration: none;
+    color: gray;
+    font-size: 14px;
+}
+.mainInfo{
+    width: 900px;
+}
+.casting{
+    margin-top: 50px;
+    margin-bottom: 40px;
+    padding-left: 5px;
+    font-size: 20px;
+    font-weight: bolder;
+}
+.actor{
+    display: inline-block;
+    width: 110px;
+    text-align: center;
+    margin-right: 25px;
+    margin-top: 10px;
+}
+.actorImg{
+    width: 95px;
+    height: 102px;
+    border-radius: 100%;
+}
+.role{
+    font-weight: bold;
+    margin-bottom: 0;
+    font-size: 15px;
+    margin-top: 5px;
+}
+.actorName{
+    font-size: 15px;
+}
+.plus{
+    margin-top: 20px;
+    padding: 15px 395px;
+    border: none;
+}
+.imageInfoTitle{
+    margin-top: 100px;
+    margin-bottom: 30px;
+    font-size: 20px;
+    font-weight: bolder;
+}
+.imageInfo img{
+    width: 800px;
+}
+.material-icons{
+    border : none;
+    outline: none;
+    background-color: transparent;
+    padding: 0;
+    cursor: pointer;
+}
+.calendarOutside{
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    width: 360px;
+    background: white;
+    border: 2px solid #aaaaaa;
+    border-radius: 20px;
+}
+.date{
+    font-size: 15px;
+    font-weight: 600;
+    text-align: left;
+    margin-left: 30px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.sub{
+    font-size: 15px;
+    font-weight: 600;
+    text-align: left;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+.runtime{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.seat{
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+.calendarInside{
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+}
+.calendarInside .nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-bottom: 30px;
+}
+.calendarInside .nav .current-date{
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+.calendarInside .nav button{
+    width: 38px;
+    height: 38px;
+    font-size: 30px;
+    color: #878787;
+}
+.calendar ul{
+    display: flex;
+    list-style: none;
+    flex-wrap: wrap;
+    text-align: center;
+}
+.calendar .weeks li{
+    font-weight: 500;
+}
+.calendar .days{
+    margin-bottom: 20px;
+}
+.calendar ul li {
+    width: calc(100% / 7);
+    position: relative;
+}
+.calendar .days li{
+    z-index: 1;
+    margin-top: 15px;
+    cursor: pointer;
+}
+.days li.inactive{
+    color: #aaa;
+}
+.days li.active{
+    color: #fff;
+}
+.calendar .days li::before{
+    position: absolute;
+    content: '';
+    height: 40px;
+    width: 40px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 50%;
+    z-index: -1;
+}
+.days li:hover::before{
+    background: #f2f2f2;
+}
+.days li.active::before{
+    background: mediumpurple;
+}
+.timeTable button{
+    border: 2px solid mediumpurple;
+    background-color: transparent;
+    color: mediumpurple;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 8px;
+    padding-right: 20px;
+}
+.bookingBtn{
+    width: 360px;
+    text-align: center;
+}
+.booking{
+    border: none;
+    border-radius: 10px;
+    background-color: mediumpurple;
+    color: white;
+    padding: 15px 146px;
+    margin-top: 10px;
+    font-size: 15px;
+}
+.booking:hover{
+    cursor: pointer;
+}
+.bookingEng{
+    border: 2px solid mediumpurple;
+    border-radius: 10px;
+    background-color: white;
+    color: mediumpurple;
+    font-weight: bold;
+    padding: 15px 120px;
+    margin-top: 10px;
+}

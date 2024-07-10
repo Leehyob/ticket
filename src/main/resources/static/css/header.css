@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+NG+Modern:wght@100..400&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+}
+.header{
+    width: 100%;
+    height: 150px;
+    display: inline-block;
+    text-align: center;
+}
+.header a{
+    text-decoration: none;
+}
+.header-main{
+    margin-top: 20px;
+    display: inline-block;
+    width: 1000px;
+    margin-left: -120px;
+}
+.header-main div{
+    display: inline-block;
+}
+.logo{
+    font-size: 45px;
+    font-weight: bolder;
+    font-family:'Playwrite NG Modern',Serif;
+    color: mediumpurple;
+    margin-left: 200px;
+}
+logo:hover{
+    pointer-events: none;
+}
+.line{
+    background-color: #e2dede;
+    height: 1px;
+    border: 0;
+}
+.menu{
+    margin-top: 20px;
+    margin-bottom: 15px;
+    background-color: white;
+}
+.menu ul,li{
+    display: inline-block;
+}
+.menu-link {
+    margin: 0 15px;
+    font-weight: bolder;
+    font-size: 17px;
+    color: black;
+}
+.search{
+    height: 50px;
+}
+.search input{
+    margin-left: 10px;
+    width: 300px;
+    height: 40px;
+    border-radius: 20px;
+    border: 1px solid darkgray;
+    padding-left: 10px;
+    padding-top: 2px;
+}
+.search button{
+    border: none;
+    background-color: transparent;
+}
+.search button img{
+    width: 20px;
+    height: 20px;
+}
+.login{
+    float: right;
+    margin-top: 45px;
+}
+.login li{
+    margin-left: 15px;
+    color: black;
+    font-weight: bold;
+}

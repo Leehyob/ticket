@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns="http://www.w3.org/1999/html"
+      layout:decorate="~{layouts/layout1}">
+
+<th:block  layout:fragment="css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+    <style >
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .contentImg{
+            width: 230px;
+            height: 350px;
+            margin-right: 20px;
+            border-radius: 5%;
+        }
+        .content{
+            list-style: none;
+            padding: 0;
+        }
+        li{
+            display: inline-block;
+        }
+        .title{
+            width: 230px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        p{
+            width: 230px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        h2{
+            font-size: 35px;
+            text-align: center;
+        }
+        .slide{
+            margin-bottom: 100px;
+        }
+        .banner{
+            display: inline-block;
+        }
+        .bannerImg{
+            width: 300px;
+            height: 420px;
+            margin-right: 20px;
+            border-radius: 5%;
+        }
+        .bannerImgDiv{
+            position: relative;
+        }
+        .bannerText{
+            position: absolute;
+            z-index: 5;
+        }
+        .grid-item p{
+            margin-bottom: 10px;
+        }
+        .grid-item{
+            margin-bottom: 10px;
+        }
+        .genreTitle{
+            margin-bottom: 10px;
+        }
+
+    </style>
+
+</th:block>
+<th:block layout:fragment="script">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script th:inline="javascript">
+        $(document).ready(function(){
+            console.log("진입");
+            $('.slide').slick({
+                slidesToShow: 5,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 1300,
+            });
+        });
+    </script>
+</th:block>
+
+
+<div layout:fragment="content">
+    <div class="slide">
+    <div class="banner" th:each="banner : ${banner}" >
+        <div class="bannerIn">
+            <div class="bannerImgDiv">
+                <a th:href="@{/contents/detail/{contentId}(contentId=${banner.contentId})}"><img class="bannerImg" th:src="${banner.posterUrl}" alt="포스터이미지"></a>
+            </div>
+            <div class="bannerText">
+                <strong><p class="title" th:text="${banner.contentName}"></p></strong>
+                <p th:text="${banner.theater}"></p>
+                <p th:text="${banner.date}"></p>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+
+
+<h2 class="genreTitle"><b th:text="${genre}+둘러보기"></b></h2>
+    <hr>
+    <div class="grid-container">
+             <ul class="content">
+                 <li class="grid-item" th:each="content : ${contents}" >
+                     <a th:href="@{/contents/detail/{contentId}(contentId=${content.contentId})}"><img class="contentImg" th:src="${content.posterUrl}" alt="포스터이미지"></a>
+                     <strong><p class="title" th:text="${content.contentName}"></p></strong>
+<!--                     <div th:if="${!content.theater.isEmpty()}">-->
+                        <p th:text="${content.theater}"></p>
+<!--                     </div>-->
+                     <!--<div th:unless="${content.theater.isEmpty()}">
+                         <p style="color: gray" th:text="장소 정보 없음"></p>
+                     </div>-->
+                     <p th:text="${content.date}"></p>
+                 </li>
+             </ul>
+    </div>
+</div>
+
+
+
+
+</html>

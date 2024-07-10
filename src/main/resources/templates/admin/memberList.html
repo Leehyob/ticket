@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<div layout:fragment="content">
+<div class="container">
+    <h2>회원 관리</h2>
+    <p style="color: gray">※회원 삭제 이후에는 복구할 수 없습니다※</p>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>회원 조회</th>
+            <th>이메일</th>
+            <th>이름</th>
+            <th>닉네임</th>
+            <th>회원 삭제</th>
+        </tr>
+        </thead>
+        <tbody>
+       <tr th:each="member : ${memberList}">
+           <td th:text="${member.memberId}"></td>
+           <td th:text="${member.email}"></td>
+           <td th:text="${member.name}"></td>
+           <td th:text="${member.nickname}"></td>
+           <td><a th:href="@{/admin/deleteMember/${member.memberId}}">회원 삭제</a></td>
+       </tr>
+        </tbody>
+    </table>
+    <div th:with="start=${(memberList.number/maxPage)*maxPage + 1}, end=(${(memberList.totalPages == 0) ? 1 : (start + (maxPage - 1) < memberList.totalPages ? start + (maxPage - 1) : memberList.totalPages)})" >
+        <ul class="pagination justify-content-center">
+
+            <li class="page-item" th:classappend="${memberList.number eq 0}?'disabled':''">
+                <a th:href="@{'/admin/members/' + ${memberList.number-1}}" aria-label='Previous' class="page-link">
+                    <span aria-hidden='true'>Previous</span>
+                </a>
+            </li>
+
+            <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${memberList.number eq page-1}?'active':''">
+                <a th:href="@{'/admin/members/' + ${page-1}}" th:inline="text" class="page-link">[[${page}]]</a>
+            </li>
+
+            <li class="page-item" th:classappend="${memberList.number+1 ge memberList.totalPages}?'disabled':''">
+                <a th:href="@{'/admin/members/' + ${memberList.number+1}}" aria-label='Next' class="page-link">
+                    <span aria-hidden='true'>Next</span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</div>
+</div>
+</html>

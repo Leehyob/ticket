@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            width: 1150px;
+        }
+        #basic{
+            position: relative;
+        }
+        .bookingHeader{
+            height: 60px;
+        }
+        .middle{
+            float: left;
+            display: inline-block;
+            width: 60%;
+        }
+        .basicSeatImg{
+            z-index: 1;
+            position: absolute;
+            display: inline-block;
+            width: 720px;
+            height: 685px;
+        }
+        .pocket{
+            display: inline-block;
+            /*margin-top: 188px;*/
+            /*margin-left: 219px;*/
+        }
+        .seatImg{
+            position: absolute;
+            display: inline-block;
+            margin-right: 6px;
+        }
+        .seatImg img{
+            position: absolute;
+            z-index: 2;
+        }
+        .seatImgTable td{
+            margin-right: 10px;
+        }
+        .sidebar{
+            display: inline-block;
+            float: right;
+            width: 38%;
+        }
+        .seatImg img:nth-child(2){
+            top: 300px;
+        }
+        .areaTitle{
+            width: 250px;
+            height: 30px;
+            padding: 10px;
+            font-size: 14px;
+        }
+        .chooseArea{
+            width: 250px;
+            height: 140px;
+            padding-top: 90px;
+            text-align: center;
+            background-color: #f2f2f2;
+        }
+        .seatClassTitle{
+            width: 250px;
+            height: 30px;
+            padding: 10px;
+            font-size: 14px;
+            margin-top: 210px;
+        }
+        .seatClass{
+            width: 240px;
+            height: 60px;
+            float: left;
+            padding-bottom: 60px;
+            padding-top: 10px;
+            padding-left: 10px;
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        .seatClass img{
+            margin-top: 15px;
+            margin-right: 5px;
+        }
+        .seatCheck{
+            width: 250px;
+            height: 30px;
+            padding: 10px;
+            font-size: 14px;
+            margin-top: 130px;
+        }
+        .seatCheckTable{
+            width: 250px;
+            height: 60px;
+            text-align: center;
+            background-color: #f2f2f2;
+            padding-bottom: 30px;
+            margin-top: 7px;
+        }
+        .seatBtn{
+            margin-top: 100px;
+            padding: 10px;
+        }
+        .seatBtn button{
+            padding : 15px 65px
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        function seatClickEvent(event) {
+            console.log("이미지 바꾸기");
+            var clickedImg = event.target;
+            var originalSrc = clickedImg.getAttribute('data-original-src');
+            var newSrc = "https://ticketimage.interpark.com/TMGSNAS/TMGS/S/S_90.gif";
+
+            // 이미지가 원래의 src인지, 새로운 src인지 확인하여 토글
+            if (clickedImg.src === newSrc) {
+                clickedImg.src = originalSrc;
+            } else {
+                clickedImg.src = newSrc;
+            }
+            console.log(clickedImg.src);
+        }
+
+        // DOM이 완전히 로드된 후에 실행되는 이벤트 리스너
+        document.addEventListener('DOMContentLoaded', function() {
+            var seatImgs = document.querySelectorAll('.seatImgChange');
+            seatImgs.forEach(function(img) {
+                // data-original-src 속성에 원래의 src 값 저장
+                img.setAttribute('data-original-src', img.src);
+            });
+        });
+    </script>
+
+</head>
+<body>
+<div class="bookingHeader">
+    <h2>예매하기</h2>
+</div>
+<div class="middle">
+    <div id="basic">
+        <img class="basicSeatImg" th:src="${seatImage}">
+       <!-- <table class="seatImgTable">
+            <tbody>
+                <tr>
+                    <td>-->
+        <div class="pocket">
+                        <div class="seatImg"  th:each="seat : ${seats}"
+                             th:with="top=${seat.getY()}, left=${seat.getX()}"
+                        th:style="'top:' + ${top} + 'px; left:' + ${left} + 'px;'">
+                        <a class="seatImgLink" href="#" ><img  onclick="seatClickEvent(event)"
+                                                              class="seatImgChange" th:src="${seat.getSeatImg()}"></a>
+<!--                            @{/contents/seat(seat = ${seat.getSeatNumber()})}-->
+                        </div>
+        </div>
+                   <!-- </td>
+                </tr>
+            </tbody>
+        </table>-->
+    </div>
+</div>
+<div class="sidebar">
+    <div class="areaTitle">
+        <h3>원하는 좌석 위치를 선택해주세요</h3>
+        <div class="chooseArea">
+            원하는 위치의<br>
+            좌석을 선택해주세요!
+        </div>
+    </div>
+    <div class="seatClassTitle">
+        <h3>좌석등급/잔여석</h3>
+        <div class="seatClass">
+            <img src="https://ticketimage.interpark.com/TMGSNAS/TMGS/G/1_90.gif">R석 0석 77000원<br>
+            <img src="https://ticketimage.interpark.com/TMGSNAS/TMGS/G/2_90.gif">S석 0석 55000원
+        </div>
+    </div>
+    <div class="seatCheck">
+        <h3>선택좌석</h3>
+        <div class="seatCheckTable">
+            <table>
+                <tr>
+                    <th>좌석등급</th>
+                    <th>좌석번호</th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="seatBtn">
+        <button>좌석 선택 완료 &nbsp;&nbsp; ></button>
+    </div>
+</div>
+</body>
+</html>

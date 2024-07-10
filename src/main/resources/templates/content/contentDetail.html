@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns="http://www.w3.org/1999/html"
+      layout:decorate="~{layouts/layout1}">
+
+
+<th:block  layout:fragment="css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="/css/contentDetail.css">
+</th:block>
+
+
+<div class="middle" layout:fragment="content">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <th:block>
+        <script type="text/javascript" src="/js/contentDetail.js"></script>
+        <script>
+            function bookingContent(contentCode){
+                const date = document.getElementById("date").value;
+                console.log(date)
+                console.log("들어옴");
+                window.open("/contents/booking?contentCode=" + contentCode + "&date=" + date,
+                    '_blank',"width=1050,height=750,left=400,top=150");
+            }
+        </script>
+    </th:block>
+
+
+    <div class="firstDiv">
+    <div class="left">
+<div class="info">
+    <button class="wait">예매대기 ▼</button>
+    <h2 class="title" th:text="${detail.genre} + '<' + ${detail.contentName}+'>'"><strong></strong></h2>
+    <div class="ranking">
+        <img  src="/image/주석 2024-06-26 102606.png">
+    </div>
+    <div class="detailImg">
+        <img class="poster" th:src="${detail.posterUrl}">
+        <img src="/image/주석 2024-06-26 101451.png">
+        <a href="https://x.com/?lang=ko"><img src="/image/주석 2024-06-26 101422.png"></a>
+        <a href="https://www.facebook.com/?locale=ko_KR"><img src="/image/주석 2024-06-26 101434.png"></a>
+    </div>
+    <div class="infoIn">
+        <table>
+            <tbody>
+            <tr>
+        <th class="subTitle">장소</th>
+        <td th:text="${detail.theaterName}">1</td>
+            </tr>
+            <tr>
+        <th class="subTitle">공연기간</th>
+        <td th:text="${detail.date}">2</td>
+            </tr>
+            <tr>
+        <th class="subTitle">공연시간</th>
+        <td th:unless="${detail.runtime.isEmpty()}" th:text="${detail.runtime}">3</td>
+            </tr>
+            <tr>
+        <th class="subTitle">관람연령</th>
+        <td th:text="${detail.ageLimit}">4</td>
+            </tr>
+            <tr>
+        <th class="subTitle">가격</th>
+        <td th:text="${detail.price}+'원'">5</td>
+            </tr>
+            <tr>
+                <th class="subTitle">혜택</th>
+                <td>
+                    <p>무이자 할부 <span> ▶</span></p>
+                    <a href="https://nol.interpark.com/promotion/nol-promotion?mchtNo=INTERPARK_TICKET&mchtDtlNo=07&eventCode=NOIII"><img src="/image/주석 2024-06-26 101401.png">NOL 카드로 최대 7만원 혜택받기 ></a><br>
+                    <a href="https://ticket.interpark.com/Contents/Toping"><img src="/image/주석 2024-06-26 101411.png">토핑가입하고 중복할인 쿠폰받기 ></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+    <hr>
+    <div class="mainInfo">
+        <div class="actors" th:if="${!detail.getActorList().isEmpty()}">
+            <h3 class="casting">캐스팅</h3>
+            <div class="actor" th:each="actor : ${detail.getActorList()}">
+                <img class="actorImg" th:src="${actor.actImgUrl}"/>
+                <p class="role" th:text="${actor.nameOfRole}"/>
+                <p class="actorName" th:text="${actor.actorName}">
+            </div>
+            <button class="plus">더보기</button>
+        </div>
+        <h3 class="imageInfoTitle">공지사항</h3>
+        <div class="imageInfo" th:each="image : ${detail.getContentImgList()}">
+            <img th:src="${image.contentImgUrl}">
+        </div>
+    </div>
+</div>
+
+<div class="right" id="right">
+    <div class="calendarOutside">
+        <h4 class="date">관람일</h4>
+        <div class="calendarInside">
+    <div class="calendar-header">
+        <div class="nav">
+            <button class="material-icons" id="prev">chevron_left</button>
+            <p class="current-date"></p>
+            <button class="material-icons" id="next">chevron_right</button>
+        </div>
+        <div class="calendar">
+            <ul class="weeks">
+                <li>일</li>
+                <li>월</li>
+                <li>화</li>
+                <li>수</li>
+                <li>목</li>
+                <li>금</li>
+                <li>토</li>
+            </ul>
+            <ul class="days">
+
+            </ul>
+        </div>
+        <hr>
+        <div class="timeTable">
+            <h4 class="sub">회차</h4>
+                <button class="runtime">회차 </button>
+                <p class="seat">잔여석 : 0석</p>
+        </div>
+        <hr>
+        <div class="castingInCalendar">
+            <h4 class="sub">캐스팅</h4>
+            <p class="todayCasting"></p>
+        </div>
+    </div>
+    </div>
+    </div>
+    <div class="bookingBtn">
+        <input type="hidden" id="date" name="date" value="값">
+    <button class="booking" th:data-content-code="${detail.getContentId()}"
+            onclick="bookingContent(this.getAttribute('data-content-code'))">예매하기</button>
+    <br><button class="bookingEng">BOOKING/外囯語</button>
+    </div>
+</div>
+</div>
+</div>
+</html>

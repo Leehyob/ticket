@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns="http://www.w3.org/1999/html"
+      layout:decorate="~{layouts/layout1}">
+
+<th:block  layout:fragment="css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+    <style>
+        img{
+            width: 100%;
+            height: 450px;
+            margin-right: 20px;
+        }
+        .slide{
+            margin-top: -54px;
+            margin-left: 0;
+            margin-right: 0;
+        }
+        .miniBanner:nth-child(2){
+            margin-top: 70px;
+            margin-left: 150px;
+        }
+        .miniBanner:nth-child(5){
+            margin-top: 5px;
+            margin-left: 150px;
+        }
+        .miniBanner{
+            display: inline-block;
+        }
+        .miniBanner img{
+            width: 400px;
+            height: 100px;
+            border-radius: 12px;
+        }
+    </style>
+</th:block>
+<th:block layout:fragment="script">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script th:inline="javascript">
+        $(document).ready(function(){
+            console.log("진입");
+            $('.slide').slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                autoplay: true,
+                pauseOnHover : false,
+                dots : true,
+                autoplaySpeed: 1700,
+            });
+        });
+    </script>
+</th:block>
+
+<div layout:fragment="content">
+    <div class="slide">
+    <div class="slideImage" th:each="image : ${slide}">
+        <img th:src="${image.getMainImg()}" >
+    </div>
+    </div>
+    <div class="miniBanner" th:each="banner : ${banner}">
+        <img th:src="${banner.mainImg}">
+    </div>
+</div>
+
+
+</html>

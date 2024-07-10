@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div layout:fragment="content">
+
+    <div>
+        <ul>
+            <li  sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+                <a class="nav-link" href="/admin/members">회원 관리</a>
+            </li>
+            <li   sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+                <a class="nav-link" href="/admin/items">작품 관리</a>
+            </li>
+            <li  sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+                <a class="nav-link" href="/cart">Q&A 답변</a>
+            </li>
+        </ul>
+    </div>
+
+</div>
+</html>
